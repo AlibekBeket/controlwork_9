@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -70,10 +71,14 @@ class UserDetailView(DetailView):
         context['photos'] = user_photos
         return context
 
-class UpdateUserView(UpdateView):
+
+class UpdateUserView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     template_name = 'user_update.html'
     form_class = UpdateUserForm
     model = User
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'pk': self.object.pk})
+
+    def test_func(self):
+        return self.request.user == User.objects.get(id=self.kwargs['pk'])
