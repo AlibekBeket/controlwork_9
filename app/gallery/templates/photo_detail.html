@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Photo Detail{% endblock %}
+{% block content %}
+<div class="photo">
+    <div class="photo_img_block">
+        <img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}">
+    </div>
+    <div class="photo_info_block">
+        <p>Signature: {{ photo.signature }}</p>
+        <p>Author: {{ photo.author }}</p>
+        <p>Created at: {{ photo.created_at }}</p>
+        <p>In favorites:
+            {% if not in_favorites %}
+            None
+            {% else %}
+            {% for user in in_favorites %}
+            <a href="#">{{ user.username }}</a>
+            {% endfor %}
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}

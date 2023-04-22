@@ -6,5 +6,5 @@ urlpatterns = [
     path('', GalleryListView.as_view()),
     path('gallery/', GalleryListView.as_view(), name='gallery_list'),
     path('photo_create/', PhotoAddView.as_view(), name='photo_create'),
-    path('photo_detail/', PhotoDetailView.as_view(), name='photo_detail'),
+    path('photo_detail/<int:pk>', PhotoDetailView.as_view(), name='photo_detail'),
 ]
