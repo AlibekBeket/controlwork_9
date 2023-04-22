@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
@@ -14,7 +15,7 @@ class GalleryListView(ListView):
     ordering = ('-created_at',)
 
 
-class PhotoAddView(CreateView):
+class PhotoAddView(LoginRequiredMixin, CreateView):
     template_name = 'photo_create.html'
     model = Photo
     form_class = PhotoForm
@@ -46,18 +47,28 @@ class PhotoDetailView(DetailView):
         return context
 
 
-class PhotoUpdateView(UpdateView):
+class PhotoUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     template_name = 'photo_update.html'
     form_class = PhotoForm
     model = Photo
+    groups = ['moderator']
 
     def get_success_url(self):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
 
+    def test_func(self):
+        return self.request.user.groups.filter(name__in=self.groups).exists() or self.request.user == Photo.objects.get(
+            id=self.kwargs['pk']).author
 
-class PhotoDeleteView(DeleteView):
+
+class PhotoDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     template_name = 'photo_delete.html'
     model = Photo
+    groups = ['moderator']
 
     def get_success_url(self):
         return reverse('gallery_list')
+
+    def test_func(self):
+        return self.request.user.groups.filter(name__in=self.groups).exists() or self.request.user == Photo.objects.get(
+            id=self.kwargs['pk']).author
