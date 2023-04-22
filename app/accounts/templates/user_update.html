@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Update User{% endblock %}
+{% block content %}
+<h1>Update User</h1>
+<div class="form">
+    <form action="{% url 'user_update' user.pk %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="button_update_or_create">
+            <input type="submit" value="update">
+        </div>
+    </form>
+</div>
+{% endblock %}

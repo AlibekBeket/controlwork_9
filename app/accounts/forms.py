@@ -32,3 +32,17 @@ class CustomUserCreationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class UpdateUserForm(forms.ModelForm):
+    username = forms.CharField(max_length=100, required=True)
+
+    class Meta:
+        model = User
+        fields = ['username']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        if len(username) < 4:
+            raise forms.ValidationError('Имя пользователя не может состоять из 3 или меньше символов')

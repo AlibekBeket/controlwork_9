@@ -30,6 +30,9 @@
                     <input class="button_login" type="submit" value="выйти">
                 </form>
             </li>
+            <li>
+                <a href="{% url 'user_detail' %} user.pk">Профиль</a>
+            </li>
             {% else %}
             <li>
                 <a href="{% url 'login' %}">Войти</a>
