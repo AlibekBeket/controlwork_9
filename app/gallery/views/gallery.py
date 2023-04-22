@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from gallery.models import Photo
 
@@ -32,3 +32,9 @@ class PhotoAddView(CreateView):
             return redirect(reverse('gallery_list'))
         return render(request, 'photo_create.html',
                       context={'form': form})
+
+
+class PhotoDetailView(DetailView):
+    template_name = 'photo_detail.html'
+    model = Photo
+    context_object_name = 'photo'
