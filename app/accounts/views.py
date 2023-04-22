@@ -1,8 +1,11 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, DetailView
 
 from accounts.forms import LoginForm, CustomUserCreationForm
+
+from gallery.models import Photo
 
 
 # Create your views here.
@@ -49,3 +52,19 @@ class RegisterView(CreateView):
             return redirect(self.success_url)
         context = {'form': form}
         return self.render_to_response(context)
+
+
+class UserDetailView(DetailView):
+    template_name = 'user_page.html'
+    model = get_user_model()
+    context_object_name = 'user'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+        photos = Photo.objects.all()
+        user_photos = []
+        for photo in photos:
+            if User.objects.get(id=self.kwargs['pk']) in photo.favorites.all():
+                user_photos.append(photo)
+        context['photos'] = user_photos
+        return context
