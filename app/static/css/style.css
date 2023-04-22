@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin-top: 60px;
+    background: white;
+    font-size: 25px;
+    color: black;
+}
+.container{
+    margin: 0 auto;
+    max-width: 1200px;
+}
+.to_do_row{
+    margin-top: 10px;
+    border-bottom: 2px solid black;
+}
+.navbar{
+    display: block;
+    background: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    font-size: 0;
+    box-sizing: border-box;
+    padding: 7px 30px;
+}
+.menu{
+    font-size: 14px;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    color: black;
+}
+.menu li {
+    display: inline-block;
+}
+.menu a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+    padding: 5px 15px;
+}
+.menu a:hover {
+    color: black;
+    text-decoration: underline;
+}
+.logo{
+    font-size: 30px;
+}
