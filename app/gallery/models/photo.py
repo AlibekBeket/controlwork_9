@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 
-class Posts(models.Model):
+class Photo(models.Model):
     author = models.ForeignKey(
         to=get_user_model(),
         related_name='user_post',
