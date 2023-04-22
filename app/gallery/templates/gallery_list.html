@@ -3,10 +3,14 @@
 {% block content %}
 {% for photo in photos %}
 <div class="photo">
-    <p><a href="#"><img src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a></p>
-    <p>{{ photo.signature }}</p>
-    <p>{{ photo.author }}</p>
-    <p>{{ photo.created_at }}</p>
+    <div class="photo_img_block">
+        <a href="#"><img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a>
+    </div>
+    <div class="photo_info_block">
+        <p>Signature: {{ photo.signature }}</p>
+        <p>Author: {{ photo.author }}</p>
+        <p>Created at: {{ photo.created_at }}</p>
+    </div>
 </div>
 {% endfor %}
 {% endblock %}

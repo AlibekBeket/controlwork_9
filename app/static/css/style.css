@@ -7,18 +7,15 @@ body{
     background: white;
     font-size: 25px;
     color: black;
+    background: #616161;
 }
 .container{
     margin: 0 auto;
     max-width: 1200px;
 }
-.to_do_row{
-    margin-top: 10px;
-    border-bottom: 2px solid black;
-}
 .navbar{
     display: block;
-    background: white;
+    background: OrangeRed;
     position: fixed;
     top: 0;
     right: 0;
@@ -26,6 +23,10 @@ body{
     font-size: 0;
     box-sizing: border-box;
     padding: 7px 30px;
+}
+.navbar_space{
+    display: flex;
+    justify-content: space-between;
 }
 .menu{
     font-size: 14px;
@@ -50,4 +51,25 @@ body{
 }
 .logo{
     font-size: 30px;
+}
+.photo{
+    padding: 10px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background: Moccasin;
+}
+.photo_img{
+    width: 400px;
+    height: 300px;
+}
+.photo_img_block{
+    display: inline-block;
+}
+.photo_info_block{
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 10px;
+}
+.bottom_indent{
+    margin-bottom: 100px;
 }
