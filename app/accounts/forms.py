@@ -22,6 +22,9 @@ class CustomUserCreationForm(forms.ModelForm):
         password_confirm = cleaned_data.get('password_confirm')
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError('Пароли не совпадают')
+        username = cleaned_data.get('username')
+        if len(username) < 4:
+            raise forms.ValidationError('Имя пользователя не может состоять из 3 или меньше символов')
 
     def save(self, commit=True):
         user = super().save(commit=False)
