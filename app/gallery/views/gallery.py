@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, DeleteView, UpdateView
 
 from gallery.models import Photo
 
@@ -44,3 +44,12 @@ class PhotoDetailView(DetailView):
         context['in_favorites'] = Photo.objects.get(id=self.kwargs['pk']).favorites.all()
         print(context.get('in_favorites'))
         return context
+
+
+class PhotoUpdateView(UpdateView):
+    template_name = 'photo_update.html'
+    form_class = PhotoForm
+    model = Photo
+
+    def get_success_url(self):
+        return reverse('photo_detail', kwargs={'pk': self.object.pk})

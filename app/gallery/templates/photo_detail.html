@@ -14,7 +14,7 @@
             None
             {% else %}
             {% for user in in_favorites %}
-            <a href="#">{{ user.username }}</a>
+            <span><a href="#">{{ user.username }}</a>; </span>
             {% endfor %}
             {% endif %}
         </p>
