@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.views.generic import TemplateView
 
@@ -29,3 +29,8 @@ class LoginView(TemplateView):
         if next:
             return redirect(next)
         return redirect('projects_list')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('gallery_list')
