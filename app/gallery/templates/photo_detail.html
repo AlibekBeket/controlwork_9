@@ -11,14 +11,14 @@
     </div>
     <div class="photo_info_block">
         <p>Signature: {{ photo.signature }}</p>
-        <p>Author: {{ photo.author }}</p>
+        <p>Author: <a href="{% url 'user_profile' photo.author.id %}">{{ photo.author }}</a></p>
         <p>Created at: {{ photo.created_at }}</p>
         <p>In favorites:
             {% if not in_favorites %}
             None
             {% else %}
             {% for user in in_favorites %}
-            <span><a href="#">{{ user.username }}</a>; </span>
+            <span><a href="{% url 'user_profile' user.id %}">{{ user.username }}</a>; </span>
             {% endfor %}
             {% endif %}
         </p>

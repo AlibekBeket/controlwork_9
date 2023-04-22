@@ -4,11 +4,11 @@
 <h1>Delete Photo</h1>
 <div class="photo">
     <div class="photo_img_block">
-        <a href="{% url 'photo_detail' photo.pk %}"><img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a>
+        <img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}">
     </div>
     <div class="photo_info_block">
         <p>Signature: {{ photo.signature }}</p>
-        <p><a href="#">Author: {{ photo.author }}</a></p>
+        <p><a href="{% url 'user_profile' photo.author.id %}">Author: {{ photo.author }}</a></p>
         <p>Created at: {{ photo.created_at }}</p>
     </div>
 </div>
