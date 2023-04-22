@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Profile{% endblock %}
 {% block navbar %}
+{% if perms.accounts.update_user %}
 <a href="{% url 'user_update' user.pk %}">Update Profile</a>
+{% endif %}
 {% endblock %}
 {% block content %}
 <div class="user_info">

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Photo Detail{% endblock %}
 {% block navbar %}
+{% if perms.gallery.photo_update_or_delete %}
 <a href="{% url 'photo_update' photo.pk %}">Update Photo</a>
 <a href="{% url 'photo_delete' photo.pk %}">Delete Photo</a>
+{% endif %}
 {% endblock %}
 {% block content %}
 <div class="photo">

@@ -15,7 +15,9 @@
             </li>
             {% if user.is_authenticated %}
             <li>
+                {% if perms.gallery.photo_add %}
                 <a href="{% url 'photo_create' %}">Add Photo</a>
+                {% endif %}
             </li>
             {% endif %}
             <li>
