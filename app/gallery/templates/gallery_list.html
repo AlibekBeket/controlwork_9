@@ -4,13 +4,30 @@
 {% for photo in photos %}
 <div class="photo">
     <div class="photo_img_block">
-        <a href="{% url 'photo_detail' photo.pk %}"><img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a>
+        <a href="{% url 'photo_detail' photo.pk %}"><img class="photo_img" src="{{ photo.photo.url }}"
+                                                         alt="{{ photo.author }}"></a>
     </div>
     <div class="photo_info_block">
         <p>Signature: {{ photo.signature }}</p>
         <p>Author: <a href="{% url 'user_profile' photo.author.id %}">{{ photo.author }}</a></p>
         <p>Created at: {{ photo.created_at }}</p>
     </div>
+    <div id="button">
+        {% if user in photo.favorites.all %}
+        <button type="submit" id="delete" value="subtract">Delete</button>
+        {% elif user not in photo.favorites.all %}
+        <button type="submit" id="add" value="add">Add</button>
+        {% endif %}
+    </div>
 </div>
 {% endfor %}
+{% endblock %}
+{% block script %}
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+
+</script>
 {% endblock %}
