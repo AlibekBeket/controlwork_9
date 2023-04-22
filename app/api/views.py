@@ -26,7 +26,7 @@ def favorite_add_view(request, *args, **kwargs):
         if user_add == user:
             return response
     object = Photo.objects.filter(id=kwargs['pk']).first()
-    object.favorite = user_add
+    object.favorites.add(user_add)
     object.save()
     return response
 
@@ -42,5 +42,6 @@ def favorite_delete_view(request, *args, **kwargs):
     for user in users:
         if user == user_delete:
             user.delete()
+            users.save()
             return response
     return response
