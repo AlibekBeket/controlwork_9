@@ -1,28 +1,46 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
+import json
 
+from django.contrib.auth.models import User
+from django.http import HttpResponseNotAllowed, HttpResponse, JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+from rest_framework.response import Response
 from gallery.models import Photo
 
 
-class FavoriteAddView(APIView):
-    def post(self, request, *args, **kwargs):
-        user_add = self.request.user
-        users = Photo.objects.filter(id=self.kwargs['pk']).first().favorite.all()
-        for user in users:
-            if user == user_add:
-                return Response(status=200)
-        object = Photo.objects.filter(id=self.kwargs['pk']).first()
-        object.favorite = user_add
-        return Response(status=204)
+@ensure_csrf_cookie
+def get_token_view(request, *args, **kwargs):
+    if request.method == 'GET':
+        return HttpResponse()
+    return HttpResponseNotAllowed(f'Only GET request are allowed {request.method}')
 
 
-class FavoriteDeleteView(APIView):
-    def post(self, request, *args, **kwargs):
-        user_delete = self.request.user
-        users = Photo.objects.filter(id=self.kwargs['pk']).first().favorite.all()
-        for user in users:
-            if user == user_delete:
-                user.delete()
-        else:
-            Response(status=200)
-        return Response(status=204)
+def favorite_add_view(request, *args, **kwargs):
+    response_data = {'favorite': 'Добавление из избранных'}
+    response = JsonResponse(response_data)
+    response.status_code = 200
+    json_dict = json.loads(request.body)
+    user_id = json_dict.get('user_id')
+    user_add = User.objects.get(id=user_id)
+    users = Photo.objects.filter(id=kwargs['pk']).first().favorites.all()
+    for user in users:
+        if user_add == user:
+            return response
+    object = Photo.objects.filter(id=kwargs['pk']).first()
+    object.favorite = user_add
+    object.save()
+    return response
+
+
+def favorite_delete_view(request, *args, **kwargs):
+    response_data = {'favorite': 'Удаление из избранных'}
+    response = JsonResponse(response_data)
+    response.status_code = 200
+    json_dict = json.loads(request.body)
+    user_id = json_dict.get('user_id')
+    user_delete = User.objects.get(id=user_id)
+    users = Photo.objects.filter(id=kwargs['pk']).first().favorites.all()
+    for user in users:
+        if user == user_delete:
+            user.delete()
+            return response
+    return response
