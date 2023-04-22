@@ -28,7 +28,7 @@ class LoginView(TemplateView):
         next = request.GET.get('next')
         if next:
             return redirect(next)
-        return redirect('projects_list')
+        return redirect('gallery_list')
 
 
 def logout_view(request):

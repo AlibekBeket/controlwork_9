@@ -25,14 +25,14 @@
         <ul class="menu link">
             {% if user.is_authenticated %}
             <li>
-                <form action="#" method="post">
+                <form action="{% url 'logout' %}" method="post">
                     {% csrf_token %}
                     <input class="button_login" type="submit" value="выйти">
                 </form>
             </li>
             {% else %}
             <li>
-                <a href="#">Войти</a>
+                <a href="{% url 'login' %}">Войти</a>
             </li>
             <li>
                 <a href="#">Зарегистрироваться</a>
