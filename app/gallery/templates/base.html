@@ -18,11 +18,11 @@
                 <a href="{% url 'photo_create' %}">Add Photo</a>
             </li>
             {% endif %}
-        </ul>
-        <ul class="menu link">
             <li>
                 {% block navbar %}{% endblock %}
             </li>
+        </ul>
+        <ul class="menu link">
             {% if user.is_authenticated %}
             <li>
                 <form action="#" method="post">
