@@ -1,9 +1,9 @@
 from django.views.generic import ListView
 
-from gallery.models.photo import Photo
+from gallery.models import Photo
 
 
-class PostsListView(ListView):
+class GalleryListView(ListView):
     template_name = 'gallery_list.html'
     model = Photo
     context_object_name = 'photos'

@@ -11,7 +11,7 @@
     <div class="container navbar_space">
         <ul class="menu logo">
             <li>
-                <a href="{% url 'posts_list' %}">Gallery</a>
+                <a href="{% url 'gallery_list' %}">Gallery</a>
             </li>
         </ul>
         <ul class="menu link">
@@ -20,17 +20,17 @@
             </li>
             {% if user.is_authenticated %}
             <li>
-                <form action="{% url 'logout' %}" method="post">
+                <form action="#" method="post">
                     {% csrf_token %}
                     <input class="button_login" type="submit" value="выйти">
                 </form>
             </li>
             {% else %}
             <li>
-                <a href="{% url 'login' %}">Войти</a>
+                <a href="#">Войти</a>
             </li>
             <li>
-                <a href="{% url 'register' %}">Зарегистрироваться</a>
+                <a href="#">Зарегистрироваться</a>
             </li>
             {% endif %}
         </ul>

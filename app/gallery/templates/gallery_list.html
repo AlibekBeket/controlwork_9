@@ -3,7 +3,7 @@
 {% block content %}
 {% for photo in photos %}
 <div class="photo">
-    <p><a href="#"><img src="{{ photo.img.url }}" alt="{{ photo.author }}"></a></p>
+    <p><a href="#"><img src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a></p>
     <p>{{ photo.signature }}</p>
     <p>{{ photo.author }}</p>
     <p>{{ photo.created_at }}</p>
