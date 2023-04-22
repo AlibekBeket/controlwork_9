@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}Delete Photo{% endblock %}
+{% block content %}
+<h1>Delete Photo</h1>
+<div class="photo">
+    <div class="photo_img_block">
+        <a href="{% url 'photo_detail' photo.pk %}"><img class="photo_img" src="{{ photo.photo.url }}" alt="{{ photo.author }}"></a>
+    </div>
+    <div class="photo_info_block">
+        <p>Signature: {{ photo.signature }}</p>
+        <p><a href="#">Author: {{ photo.author }}</a></p>
+        <p>Created at: {{ photo.created_at }}</p>
+    </div>
+</div>
+<h3 class="delete_text">Are you sure you want to delete this photo?</h3>
+<div class="delete_form_block">
+    <div class="form_yes">
+        <form action="{% url 'photo_delete' photo.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Yes">
+        </form>
+    </div>
+    <div class="form_no">
+        <form action="{% url 'photo_detail' photo.id %}" method="get">
+            {% csrf_token %}
+            <input type="submit" value="No">
+        </form>
+    </div>
+</div>
+{% endblock %}
