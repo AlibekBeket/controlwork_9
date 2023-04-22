@@ -14,9 +14,9 @@
     </div>
     <div id="button">
         {% if user in photo.favorites.all %}
-        <button type="submit" id="delete" value="subtract">Delete</button>
+        <button type="submit" id="delete/{{ photo.id }}" class="button_favorite" value="subtract">Delete</button>
         {% elif user not in photo.favorites.all %}
-        <button type="submit" id="add" value="add">Add</button>
+        <button type="submit" id="add/{{ photo.id }}" value="add">Add</button>
         {% endif %}
     </div>
 </div>
@@ -28,6 +28,16 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script>
-
+    const linkLike = document.getElementsByClassName('button_favorite')
+    $(".button_favorite").click(function (e) {
+        const user_id = window.user_id
+        let data = {'user_id': user_id };
+        const postId = this.id
+            $.ajax({
+            type: "POST",
+            data: JSON.stringify(data),
+            url: `http://127.0.0.1:8000/api/favorite_${postId}/`
+        });
+    })
 </script>
 {% endblock %}
