@@ -20,6 +20,32 @@
         <p><a href="#">Author: {{ photo.author }}</a></p>
         <p>Created at: {{ photo.created_at }}</p>
     </div>
+    <div id="button">
+        {% if user in photo.favorites.all %}
+        <button type="submit" id="delete/{{ photo.id }}" class="button_favorite" value="subtract">Delete</button>
+        {% elif user not in photo.favorites.all %}
+        <button type="submit" id="add/{{ photo.id }}" value="add">Add</button>
+        {% endif %}
+    </div>
 </div>
 {% endfor %}
+{% endblock %}
+{% block script %}
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script>
+    const linkLike = document.getElementsByClassName('button_favorite')
+    $(".button_favorite").click(function (e) {
+        const user_id = window.user_id
+        let data = {'user_id': user_id };
+        const postId = this.id
+            $.ajax({
+            type: "POST",
+            data: JSON.stringify(data),
+            url: `http://127.0.0.1:8000/api/favorite_${postId}/`
+        });
+    })
+</script>
 {% endblock %}
