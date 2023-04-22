@@ -13,6 +13,11 @@
             <li>
                 <a href="{% url 'gallery_list' %}">Gallery</a>
             </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{% url 'photo_create' %}">Add Photo</a>
+            </li>
+            {% endif %}
         </ul>
         <ul class="menu link">
             <li>
