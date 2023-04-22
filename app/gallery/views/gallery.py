@@ -53,3 +53,11 @@ class PhotoUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
+
+
+class PhotoDeleteView(DeleteView):
+    template_name = 'photo_delete.html'
+    model = Photo
+
+    def get_success_url(self):
+        return reverse('gallery_list')
