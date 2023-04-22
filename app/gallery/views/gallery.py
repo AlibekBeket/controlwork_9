@@ -19,6 +19,7 @@ class PhotoAddView(LoginRequiredMixin, CreateView):
     template_name = 'photo_create.html'
     model = Photo
     form_class = PhotoForm
+    permission_required = 'gallery.photo_add'
 
     def get_success_url(self):
         return reverse('gallery_list')
@@ -52,6 +53,7 @@ class PhotoUpdateView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     form_class = PhotoForm
     model = Photo
     groups = ['moderator']
+    permission_required = 'gallery.photo_update'
 
     def get_success_url(self):
         return reverse('photo_detail', kwargs={'pk': self.object.pk})
@@ -65,6 +67,7 @@ class PhotoDeleteView(UserPassesTestMixin, LoginRequiredMixin, DeleteView):
     template_name = 'photo_delete.html'
     model = Photo
     groups = ['moderator']
+    permission_required = 'gallery.photo_delete'
 
     def get_success_url(self):
         return reverse('gallery_list')

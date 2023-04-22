@@ -76,6 +76,7 @@ class UpdateUserView(UserPassesTestMixin, LoginRequiredMixin, UpdateView):
     template_name = 'user_update.html'
     form_class = UpdateUserForm
     model = User
+    permission_required = 'accounts.update_user'
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'pk': self.object.pk})
